@@ -1,43 +1,54 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home | Codify</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+  <meta charset="UTF-8">
+  <title>Codify | Home</title>
+  <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
 <body>
 
-<header>
-    <h2>Codify</h2>
-    <nav>
-     {% if user.is_authenticated %}
-        <span class="username"> {{ user.username }} </span>
-     {% endif %}
-        <a href="/dashboard/">Dashboard</a>
-        <a href="/login/">Logout</a>
-    </nav>
-</header>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">&lt;/&gt; Codify</div>
+  <div class="nav-links">
+    <a href="{% url 'login_page' %}">{{user.username}}</a>
+    <a href="{% url 'dashboard' %}" class="btn">Get Started</a>
+    
+</div>
+</nav>
 
-<main class="container">
-    <h1>Welcome to Codify 🚀</h1>
+<!-- Hero Section -->
+<section class="hero">
+
+  <div class="hero-left">
+    <h1>
+      AI-Powered <span>Code Reviews</span><br>
+      Built for Developers
+    </h1>
+
     <p>
-        Learn to code, build real-world projects, and level up your skills with a
-        modern, beginner-friendly platform.
+      Codify analyzes your code for bugs, security issues,
+      performance bottlenecks, and best practices — instantly.
     </p>
 
-    <div class="buttons">
-        <a href="/dashboard/">Get Started</a>
-        
+    <div class="cta-buttons">
+      <a href="{% url 'dashboard' %}" class="primary-btn">Analyze My Code</a>
     </div>
-</main>
+  </div>
 
-<footer>
-    <p>© 2026 Codify. All rights reserved.</p>
-</footer>
+  <div class="hero-right">
+    <div class="glass-card">
+      <pre>
+<span class="comment">// Codify AI Review</span>
+<span class="keyword">function</span> <span class="func">reviewCode</span>() {
+  <span class="keyword">return</span> <span class="string">"Clean. Secure. Optimized."</span>;
+}
+      </pre>
+    </div>
+  </div>
+
+</section>
 
 </body>
 </html>

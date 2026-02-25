@@ -1,70 +1,53 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Codify</title>
-
-    <!-- Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{% static 'register.css' %}">
-      
+  <meta charset="UTF-8">
+  <title>Codify | Register</title>
+  <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
-
 <body>
 
-    <form class="register-card" method="post">
-        {% csrf_token %}
 
-        <div class="brand">
-            <h1>Cod<span>ify</span></h1>
-            <p>Create your account 🚀</p>
-        </div>
 
-        <h3>Register</h3>
+<!-- Main Container -->
+<div class="container">
 
-        {% if messages %}
-            <div class="alert alert-warning">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-        {% endif %}
+  <!-- Left Side -->
+  <div class="left">
+    <h1>
+      Build better code.<br>
+      Ship with confidence.
+    </h1>
+    <p>
+      Join Codify and let AI review your code for quality,
+      security, and performance — before it reaches production.
+    </p>
+  </div>
 
-        <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="first_name" class="form-control" placeholder="Enter first name" required>
-        </div>
+  <!-- Right Side -->
+  <div class="right">
+    <h2>Create Account</h2>
+    <p class="subtitle">Start reviewing code with AI</p>
 
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="last_name" class="form-control" placeholder="Enter last name" required>
-        </div>
+  <form method="POST">
+  {% csrf_token %}
 
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" placeholder="Choose a username" required>
-        </div>
+  <input type="text" name="full_name" placeholder="Full name" required>
+  <input type="text" name="username" placeholder="Username" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="password" name="password" placeholder="Password" required>
 
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Create a password" required>
-        </div>
+  <button type="submit">Create Account</button>
+  </form>
 
-        <button type="submit" class="btn btn-register btn-block mt-3">
-            Create Account
-        </button>
+  <p class="login-link">
+   Already have an account?
+   <a href="{% url 'login_page' %}">Login</a>
+  </p>
+  </div>
 
-        <div class="login-link">
-            Already have an account?
-            <a href="/login/">Login</a>
-        </div>
-    </form>
-
+</div>
 </body>
 </html>

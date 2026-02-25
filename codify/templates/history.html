@@ -1,113 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>History | Codify</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {% load static %}
+    <title>Codify | History</title>
     <link rel="stylesheet" href="{% static 'history.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
-<header>
-    <h2>Cod<span>ify</span></h2>
+<header class="navbar">
+    <div class="logo">&lt;/&gt; Codify</div>
     <nav>
-        <a href="/home/">Home</a>
         <a href="/dashboard/">Dashboard</a>
-        <a href="/login/">Logout</a>
+        <a href="/logout/">Logout</a>
     </nav>
 </header>
 
-<main class="history-container">
+<main class="history">
+    <h1>Your Code Review History</h1>
 
-    <h1>Your Review History 📜</h1>
-    <p class="subtitle">
-        View all your previously reviewed code and AI feedback.
-    </p>
-
-    <!-- History List -->
-    <div class="history-list">
-
-    {% if history %}
-        {% for item in history %}
-        <div class="history-card">
-
-            <div class="history-header">
-                <span class="language">{{ item.language }}</span>
-                <span class="date">
-                    {{ item.created_at|date:"d M Y" }}
-                </span>
-            </div>
-
-            <pre class="code-snippet">{{ item.code }}</pre>
-
-            <details>
-                <summary>▶ View AI Feedback</summary>
-                <pre class="ai-result">{{ item.ai_result }}</pre>
-            </details>
-
-        </div>
-        {% endfor %}
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+            <li>
+                <strong>{{ review.language }}</strong> | {{ review.created_at|date:"M d, Y H:i" }}<br>
+                <pre>{{ review.code }}</pre>
+                <p><strong>AI Review:</strong> {{ review.ai_result }}</p>
+            </li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <p style="text-align:center; color:#b8aa6d;">
-            No history found yet.
-        </p>
+        <p>No reviews yet.</p>
     {% endif %}
-
-</div>
-
-        <!-- Another History Item -->
-        <div class="history-card">
-            <div class="history-header">
-                <span class="language">JavaScript</span>
-                <span class="date">10 Jan 2026</span>
-            </div>
-
-            <pre class="code-snippet">
-function sum(a, b) {
-  return a + b;
-}
-            </pre>
-
-            <details>
-                <summary>View AI Feedback</summary>
-                <pre class="ai-result">
-✔ Function works correctly  
-✔ Use const or let instead of var  
-✔ Add error handling
-                </pre>
-            </details>
-        </div>
-
-        <!-- Django loop example -->
-        {# 
-        {% for item in history %}
-        <div class="history-card">
-            <div class="history-header">
-                <span class="language">{{ item.language }}</span>
-                <span class="date">{{ item.created_at }}</span>
-            </div>
-
-            <pre class="code-snippet">{{ item.code }}</pre>
-
-            <details>
-                <summary>View AI Feedback</summary>
-                <pre class="ai-result">{{ item.ai_result }}</pre>
-            </details>
-        </div>
-        {% endfor %}
-        #}
-
-    </div>
-
 </main>
-
-<footer>
-    © 2026 Codify • Your Code Review History
-</footer>
-
 </body>
 </html>

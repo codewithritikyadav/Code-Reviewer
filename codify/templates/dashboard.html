@@ -12,66 +12,68 @@
 
 <body>
 
-<header>
-    <h2>Cod<span>ify</span></h2>
+<header class="navbar">
+    <div class="logo">
+        &lt;/&gt; <span>Codify</span>
+    </div>
     <nav>
-        <a href="/home">Home</a>
-        <a href="/login/" >Logout</a>
-        <a href="/history">History</a>
+        <a href="/home/">Home</a>
+        <a href="/history/">History</a>
+        <a href="/logout/">Logout</a>
     </nav>
 </header>
 
 <main class="dashboard">
 
-    <h1>AI Code Reviewer 🤖</h1>
-    <p>Paste your code, select the language, and get instant AI feedback.</p>
+    <!-- LEFT PANEL -->
+    <section class="editor-section">
+        <h2>Paste Your Code</h2>
 
-    <form class="review-card" method="post">
-        {% csrf_token %}
+        <form method="post">
+            {% csrf_token %}
 
-        <!-- Language selector -->
-        <div class="form-group">
-            <label>Select Programming Language</label>
-            <select name="language">
-                <option value="">-- Choose Language --</option>
+            <label>Language</label>
+            <select name="language" required>
+                <option value="">-- Select Language --</option>
                 <option>Python</option>
                 <option>JavaScript</option>
                 <option>Java</option>
-                <option>C++</option>
                 <option>C</option>
+                <option>C++</option>
                 <option>HTML / CSS</option>
                 <option>SQL</option>
             </select>
+
+            <textarea
+                name="code"
+                placeholder="Paste your code here..."
+                required
+            >{{ request.POST.code }}</textarea>
+
+            <button type="submit" class="review-btn">
+                🔍 Review with AI
+            </button>
+        </form>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="review-section">
+        <h2>AI Review</h2>
+
+        <div class="review-output">
+            {% if ai_result %}
+                <pre>{{ ai_result }}</pre>
+            {% else %}
+                <p class="placeholder">
+                    Your AI code review will appear here after submission.
+                </p>
+            {% endif %}
         </div>
-
-        <!-- Code input -->
-        <div class="form-group">
-            <label>Paste Your Code</label>
-            <textarea name="code" placeholder="Paste your code here..."></textarea>
-        </div>
-
-        <!-- Button -->
-        <button type="submit" class="review-btn">
-            🔍 Review Code
-        </button>
-    </form>
-
-    <!-- AI Output -->
-    <section class="result-card">
-        <h3>AI Review Result ✨</h3>
-         {% if ai_result %}
-            <pre>{{ ai_result }}</pre>
-        {% else %}
-            <pre>Your AI review will appear here...</pre>
-        {% endif %}
-    
     </section>
 
 </main>
 
-<footer>
-    © 2026 Codify • AI Powered Code Review
-</footer>
+
 
 </body>
 </html>

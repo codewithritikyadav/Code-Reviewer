@@ -12,18 +12,19 @@ def review_code(language, code):
 
     # Prompt for AI
     prompt = f"""
-    You are an expert code reviewer.
+You are an expert {language} code reviewer.
 
-    Programming Language: {language}
+Tasks:
+1. First, rate the code correctness in percentage.
+2. Do line-by-line error detection.
+3. Explain each mistake clearly.
+4. Suggest improvements.
+5. Provide the corrected final code.
 
-    Review the following code and provide feedback on:
-    1. Code quality
-    2. Bugs and errors
-    3. Improvements and best practices
+User Code:
+{code}
+"""
 
-    Code:
-    {code}
-    """
 
     # Generate response
     response = model.generate_content(prompt)
