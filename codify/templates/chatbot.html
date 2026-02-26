@@ -1,0 +1,52 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot | Codify</title>
+    <link rel="stylesheet" href="{% static 'chatbot.css' %}">
+</head>
+<body>
+
+<div class="chat-container">
+    <h2>🤖 Codify AI Chatbot</h2>
+     <a href="{% url 'home' %}" class="exit-btn">Exit</a>
+    <div id="chat-box"></div>
+
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Ask your coding doubt..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    const message = input.value.trim();
+    if (!message) return;
+
+    chatBox.innerHTML += `<div class="user-msg">${message}</div>`;
+    input.value = "";
+
+    fetch("/chatbot/api/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight; 
+    })
+    .catch(err => {
+        chatBox.innerHTML += `<div class="bot-msg">Error contacting server</div>`;
+    });
+}
+</script>
+
+
+</body>
+</html>
