@@ -5,7 +5,7 @@ load_dotenv()
 
 def review_code(language, code):
     # Configure Gemini with API key
-    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
     # Load Gemini Flash Lite model
     model = genai.GenerativeModel("gemini-2.5-flash-lite")
