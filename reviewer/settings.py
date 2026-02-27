@@ -27,10 +27,11 @@ DEBUG = True
 
 import os
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "localhost,127.0.0.1"
-).split(",")
+ALLOWED_HOSTS = [
+    "ai-code-reviewer-syjh.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
