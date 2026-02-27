@@ -23,15 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=!pwc5xm+nf_y*iw4@j$s9pon&@f6cm9(ehenr*o(k(wvqhrxr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 import os
 
-ALLOWED_HOSTS = [
-    "ai-code-reviewer-syjh.onrender.com",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = ["ai-code-reviewer-syjh.onrender.com"]
 
 
 # Application definition

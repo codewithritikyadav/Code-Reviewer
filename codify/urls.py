@@ -10,7 +10,7 @@ from . import views
 
 # Define URL paterns
 urlpatterns = [
-    path('home/', home, name="home"),                 # Home page
+    path("", home, name="home"),                 # Home page
     path("admin/", admin.site.urls),                  # Admin interface
     path('login/', login_page, name='login_page'),    # Login page
     path('register/', register_page, name='register'),# Registration page
